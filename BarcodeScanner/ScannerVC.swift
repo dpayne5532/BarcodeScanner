@@ -8,9 +8,27 @@
 import UIKit
 import AVFoundation
 
+
+enum CameraError: String {
+    case invalidDevicceInput = "Something is wrong with the camera"
+    case invalidScannedValue = "The value scanned is not valid."
+}
+
+
+
+
+
+
 protocol ScannerVCDelegate: class {
     func didFind(barcode: String)
+    func didSurface(error: CameraError)
+
+
 }
+
+
+
+
 
 
 final class ScannerVC: UIViewController {
@@ -28,9 +46,26 @@ final class ScannerVC: UIViewController {
         fatalError("init)Coder:) has not been implemented")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCaptureSession()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard let previewLayer = previewLayer else {
+            scannerDelegate?.didSurface(error: .invalidDevicceInput)
+            return
+        }
+
+        previewLayer.frame = view.layer.bounds
+    }
+    
+    
     
     private func setupCaptureSession() {
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
+            scannerDelegate?.didSurface(error: .invalidDevicceInput)
             return
         }
         
@@ -39,12 +74,14 @@ final class ScannerVC: UIViewController {
         do { try
             videoInput = AVCaptureDeviceInput(device: videoCaptureDevice)
         } catch {
+            scannerDelegate?.didSurface(error: .invalidDevicceInput)
             return
         }
         
         if captureSession.canAddInput(videoInput) {
             captureSession.addInput(videoInput)
         } else {
+            scannerDelegate?.didSurface(error: .invalidDevicceInput)
             return
         }
         let metaDataOutput = AVCaptureMetadataOutput()
@@ -56,6 +93,7 @@ final class ScannerVC: UIViewController {
             
             
         } else {
+            scannerDelegate?.didSurface(error: .invalidDevicceInput)
             return
         }
         
@@ -79,12 +117,15 @@ final class ScannerVC: UIViewController {
 extension ScannerVC: AVCaptureMetadataOutputObjectsDelegate {
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         guard let object = metadataObjects.first else {
+            scannerDelegate?.didSurface(error: .invalidScannedValue)
             return
         }
         guard let machineReadableOnject = object as? AVMetadataMachineReadableCodeObject else {
+            scannerDelegate?.didSurface(error: .invalidScannedValue)
             return
         }
         guard let barcode = machineReadableOnject.stringValue else {
+            scannerDelegate?.didSurface(error: .invalidScannedValue)
             return
         }
         scannerDelegate?.didFind(barcode: barcode)
