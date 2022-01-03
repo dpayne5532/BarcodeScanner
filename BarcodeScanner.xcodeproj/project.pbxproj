@@ -12,6 +12,7 @@
 		3640A382278339C7002A3078 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3640A381278339C7002A3078 /* Assets.xcassets */; };
 		3640A385278339C7002A3078 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3640A384278339C7002A3078 /* Preview Assets.xcassets */; };
 		3640A38C27834028002A3078 /* ScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3640A38B27834028002A3078 /* ScannerVC.swift */; };
+		3640A38E27834E2B002A3078 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3640A38D27834E2B002A3078 /* ScannerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		3640A381278339C7002A3078 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3640A384278339C7002A3078 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3640A38B27834028002A3078 /* ScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerVC.swift; sourceTree = "<group>"; };
+		3640A38D27834E2B002A3078 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				3640A37F278339C5002A3078 /* BarcodeScannerView.swift */,
 				3640A381278339C7002A3078 /* Assets.xcassets */,
 				3640A383278339C7002A3078 /* Preview Content */,
+				3640A38D27834E2B002A3078 /* ScannerView.swift */,
 			);
 			path = BarcodeScanner;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3640A38C27834028002A3078 /* ScannerVC.swift in Sources */,
+				3640A38E27834E2B002A3078 /* ScannerView.swift in Sources */,
 				3640A380278339C5002A3078 /* BarcodeScannerView.swift in Sources */,
 				3640A37E278339C5002A3078 /* BarcodeScannerApp.swift in Sources */,
 			);
